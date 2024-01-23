@@ -65,3 +65,28 @@ console.log(undefined<0)             //false
 
 //strict equality check(===)  : it do not convert automatically one datatype to another for comparison
 console.log("2"===2)                 //false
+
+
+//LECTURE =>9 SUMMARY OF DATATYPES
+const id=Symbol('123')
+const anotherId=Symbol('123')
+console.log(id==anotherId)      //false 
+//in Symbol datatype both values are same but symbol returns different unique values for both so that's why it return false.
+
+const bigNumber = 827397289472834n
+console.log( typeof bigNumber)     //bigint
+
+//non primitives: arrays , object, functions
+//Array declaration
+const heros=["shaktiman","naagraj","doga"]
+console.log(heros)
+//object 
+let myobj={name:"soabee",age:22}
+console.log(myobj)
+//function declaration
+const myfunction=function(){
+    console.log("hello  world")
+}
+console.log ( typeof myfunction)        //function //but actually its type is function object
+console.log ( typeof myobj)             //object
+console.log ( typeof heros)             //object
