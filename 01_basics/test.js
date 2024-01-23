@@ -46,3 +46,22 @@ num1=num2=num3=2+2;       //valid in js but it is not a good approach
 console.log(num1);     
 console.log(num2);
 console.log(num3);
+
+//LECTURE=>8 COMPARISON OF DATATYPES IN JS
+
+console.log("2">1);           //true
+console.log("02"<1);           //false
+//because it automatically converts string datatype i.e "2" or"02"  to integer for comparison
+
+console.log(null>0)             //false
+console.log(null==0)             //false
+console.log(null>=0)             //true
+//NOTE: the reason of above output is that an equality check(==) and comparison >,<,>=,<= work differently 
+//comparison convert null to a number ,treating it as 0 . that's why null>=0 is true & null>0 is false.
+
+console.log(undefined==0)            //false
+console.log(undefined>0)             //false
+console.log(undefined<0)             //false
+
+//strict equality check(===)  : it do not convert automatically one datatype to another for comparison
+console.log("2"===2)                 //false
