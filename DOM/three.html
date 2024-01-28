@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chai or code</title>
+    <style>
+            .bg-black{
+            background-color: #212121;
+            color: #fff;
+    }
+    </style>
+</head>
+<body style="background-color: #212121; color: #fff">
+   
+</body>
+<script>
+    const div=document.createElement('div') //creating a div
+    console.log(div);
+    div.className="main" //setting its class property
+    div.id=Math.round(Math.random()*10+1)  //set id
+    div.setAttribute("title","generated title") //set attribute
+    div.style.backgroundColor="green"
+    div.style.padding="12px"
+    //div.innerText="CHAI OR CODE" //it overrides the text 
+    const addText=document.createTextNode("CHAI or CODE")
+    div.appendChild(addText)   //adding a text in text node
+
+    document.body.appendChild(div)  //now it show on screen 
+                                 //with the help of this command
+</script>
+</html>
