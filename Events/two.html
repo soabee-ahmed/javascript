@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chai aur Code</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    setTimeout(function(){          //setTimeout(function(){},2000) does the task written inside function body after 2 seconds only one time
+        console.log("soabee");
+    },2000)              
+    const changeText=function(){
+        document.querySelector('h1').innerHTML="BEST JS SERIES"
+    }
+    const changeMe=setTimeout(changeText,2000)
+    clearTimeout(changeMe)           //clearTimeout(changeMe) clears the time out and do not do any task asked or performed by setTimeout function where changeMe is the reference of setTimeout function
+    document.querySelector("#stop").addEventListener('click',function(){
+        clearTimeout(changeMe)
+        console.log("stopped");
+    })
+</script>
+</html>
