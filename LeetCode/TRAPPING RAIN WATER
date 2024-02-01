@@ -1,0 +1,19 @@
+class Solution {
+    public int trap(int[] height) {
+        int res=0;                                      //use concept of array preprocessing          for eg:[3,1,2,4,0,1,3,2]
+        int[] left=new int[height.length];              //create left array                           left array
+        int[] right=new int[height.length];             //create right array                          right array
+        left[0]=height[0];                                                                    
+        for(int i=1;i<left.length;i++){
+            left[i]=Math.max(left[i-1],height[i]);                                                     left array=[3,3,3,4,4,4,4,4]
+        }
+        right[height.length-1]=height[height.length-1];                                                right[0]=[2]
+        for(int i=height.length-2;i>=0;i--){                      
+            right[i]=Math.max(right[i+1],height[i]);                                                   right array=[4,4,4,4,3,3,3,2]
+        }
+        for(int i=0;i<height.length;i++){
+            res+=Math.min(left[i],right[i])-height[i];                                                 res=((math.min(3,4)-3=0)+(math.min(3,4)-1=2)+(math.min(3,4)-2=1)+(math.min(4,4)-4=0)+(math.min(4,3)-0=3)+(math.min(4,3)-1=2)+(math.min(4,3)-3=0)+(math.min(4,2)-2=0))=8
+        }
+    return res;
+    }
+}
