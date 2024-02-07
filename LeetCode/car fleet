@@ -17,3 +17,28 @@ Approach
     - start with the cars with positions closer to target (by sorting the cars by their positions)
     - they will decide the speed of the fleet (or just the fact that one fleet is formed)
     - use a stack to form the order of slower to faster cars
+
+code 
+import java.util.*;
+class Solution {
+    public int carFleet(int target, int[] position, int[] speed) {
+        if(position.length==1){
+            return 1;
+        }
+        Stack<Double> s=new Stack<>();
+        int[][] posAndSpeed=new int[position.length][2];
+        for(int i=0;i<position.length;i++){
+            posAndSpeed[i][0]=position[i];
+            posAndSpeed[i][1]=speed[i];
+        }
+        Arrays.sort(posAndSpeed,Comparator.comparingInt(a -> a[0]));  //this comparator sorts the 2d array by 1st column of an array if we write a->a[1] than it sorts an array according 2 2nd column of a 2d array
+        for(int i =posAndSpeed.length-1;i>=0;i--){
+        double currentTime=(double)(target-posAndSpeed[i][0])/posAndSpeed[i][1];
+        if(!s.isEmpty()&&currentTime<=s.peek())
+        continue;
+        else
+        s.push(currentTime);
+        }
+        return s.size();
+    }
+}
