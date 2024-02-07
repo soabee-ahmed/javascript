@@ -1,0 +1,19 @@
+Intuition
+    0   1   2   3   4   5   6   7   8   9   10   11   12
+   c3          c5       c4          c2      c1         T
+
+    - fleet is when cars gets lined up like ..c2c1
+    - if the cars intersect anywhere reaching the target they will form a fleet
+    - faster car will slow down to match the speed of slower car
+Approach
+    - How to know if cars intersect?
+    - Use the time to reach the target
+    - c1 reaches target at (12-10)/2 = 1
+    - c2 reaches target at (12-8)/4 = 1
+    - if t2<=t1 that means c2 will reach before c1
+    - that means c2 will c1 first (as it is behind c1)
+    - and reduce its speed to that of c2
+
+    - start with the cars with positions closer to target (by sorting the cars by their positions)
+    - they will decide the speed of the fleet (or just the fact that one fleet is formed)
+    - use a stack to form the order of slower to faster cars
