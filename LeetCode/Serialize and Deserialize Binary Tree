@@ -1,0 +1,62 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+    static final int EMPTY=-1;
+    int index=0;
+    ArrayList<Integer> arr=new ArrayList<>();
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if(root==null)
+        return "#";
+        return root.val+","+serialize(root.left)+","+serialize(root.right);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        // String[] strsplit=data.split("");
+        // ArrayList<String> alist=new ArrayList<>(Arrays.asList(strsplit));
+        // return helper(alist);
+        Queue<String> q=new LinkedList<>(Arrays.asList(data.split(",")));
+        return helper(q);
+    }
+    public TreeNode helper(Queue<String> q){
+        String s=q.poll();
+        if(s.equals("#")){
+            return null;
+        }
+        TreeNode root=new TreeNode(Integer.valueOf(s));
+        root.left=helper(q);
+        root.right=helper(q);
+        return root;
+        
+        
+       
+    }
+    // public TreeNode helper(ArrayList<String> alist){
+    //     if(index==arr.size()){
+    //         return null;
+    //     }
+    //     String s=alist.get(index);
+    //     int val=Integer.parseInt(s);
+    //     index++;
+    //     if(val==EMPTY){
+    //         return null;
+    //     }
+    //     TreeNode root=new TreeNode(val);
+    //     root.left=helper(alist);
+    //     root.right=helper(alist);
+    //     return root;
+    // }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// TreeNode ans = deser.deserialize(ser.serialize(root));
