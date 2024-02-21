@@ -1,0 +1,36 @@
+Approach
+1)Calculate the XOR of all elements in the array. This will give us the XOR of the two target elements that appear only once.
+2)Find the rightmost set bit in the XOR result by performing a bitwise AND operation with its two's complement (-xor). This isolates the rightmost set bit, which is a bit that is set in only one of the two target elements.
+3)Partition the array into two groups:
+Group A: Elements with the rightmost set bit as 0.
+Group B: Elements with the rightmost set bit as 1.
+Perform XOR operations within each group to find the two target elements.
+5)Return the two target elements in an array.
+
+Complexity
+Time complexity:
+The code iterates through the nums array twice, once for XORing all elements and once for separating elements into groups. Each iteration takes O(n) time, where n is the length of the array. The bitwise operations also take constant time. Hence, the overall time complexity is O(n).
+
+Space complexity:
+The space used is constant as there are no extra data structures being used that depend on the input size. Therefore, the space complexity is O(1).
+
+CODE:
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        int res=0;
+        for(int i=0;i<nums.length;i++){
+            res^=nums[i];
+        }
+        int x=0;
+        int y=0;
+        res=res&(~(res-1));    //get the rightmost set bit
+        for(int i:nums){
+            if((i&res)==0){
+                x^=i;
+            }
+            else
+                y^=i;
+        }
+        return new int[]{x,y};
+    }
+}
