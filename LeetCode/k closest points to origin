@@ -1,0 +1,44 @@
+class Solution {
+    class Point{
+        int x_intercept;
+        int y_intercept;
+        double distance;
+
+        Point(int x, int y){
+            this.x_intercept = x;
+            this.y_intercept = y;
+
+            this.distance = Math.sqrt(x*x + y*y);
+        }
+    }
+    public int[][] kClosest(int[][] points, int k) {
+        Queue<Point> pq  = new PriorityQueue(
+            new Comparator<Point>(){
+                public int compare(Point p1, Point p2){
+                    return Double.compare(p1.distance, p2.distance);
+                }
+            }
+        );
+
+        for(int[] tt: points){
+            pq.add( new Point(tt[0],tt[1]) );
+        }
+
+        int[][] ans = new int[k][2];
+        int i=0;
+
+        while(k-- != 0){
+            int[] temp = new int[2];
+            Point p = pq.poll();
+            temp[0] = p.x_intercept;
+            temp[1] = p.y_intercept;
+
+            ans[i] =temp;
+            i++;
+        }
+
+        return ans;
+        
+         
+    }
+}
