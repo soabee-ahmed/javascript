@@ -1,0 +1,19 @@
+class Solution {
+    public long repairCars(int[] ranks, int cars) {
+        long low=0;
+        long high=(long)1e14;
+        while(low<high){
+            long mid=low+(high-low)/2;
+            long repaired_cars=0;
+            for(int i:ranks){
+                repaired_cars+=(long)Math.sqrt(mid/i);                     //time required to repair n cars in mid minutes(just the reversal operation of r*n**2
+            }
+            if(repaired_cars<cars){
+                low=mid+1;
+            }
+            else 
+                high=mid;
+        }
+        return low;
+    }
+}
