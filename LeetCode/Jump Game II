@@ -1,0 +1,23 @@
+class Solution {
+    public int jump(int[] nums) {
+        int coverage=0;
+        int dest=nums.length-1;
+        int totalJumps=0;
+        int lastJumpidx=0;
+        if(nums.length==1) return 0;
+        for(int i=0;i<nums.length;i++){
+             // Update the farthest reachable index of this jump.
+            coverage=Math.max(coverage,i+nums[i]);
+            // If we finish the starting range of this jump,
+            // Move on to the starting range of the next jump.
+            if(i==lastJumpidx){
+                lastJumpidx=coverage;
+                totalJumps++;
+            if(coverage>=dest){    //already reached the destination
+                return totalJumps;
+            }
+            }
+        }
+        return totalJumps;
+    }
+}
