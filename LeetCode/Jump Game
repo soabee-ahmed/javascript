@@ -1,0 +1,12 @@
+greedy algo
+class Solution {
+    public boolean canJump(int[] nums) {
+    int finalPosition=nums.length-1;        //initialize the finalPosition with the last position
+        for(int i=nums.length-2;i>=0;i--){  //start traversing from the second last element
+            if(i+nums[i]>=finalPosition){ //if(current index+no. of jumps given >=finalPosition)
+                finalPosition=i;          //update the finalPosition 
+            }
+        }
+        return finalPosition==0;     //if at the end our finalPosition comes to the index 0 than
+    }                                //we can make a jump
+}
