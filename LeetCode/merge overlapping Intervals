@@ -1,0 +1,93 @@
+Algorithm / Intuition
+Optimal Approach: 
+Intuition:
+In the previous approach, while checking the intervals, we first selected an interval using a loop and then compared it with others using another loop. But in this approach, we will try to do the same using a single loop. Let’s understand how:
+
+We will start traversing the given array with a single loop. At the first index, as our answer list is empty, we will insert the first element into the answer list. While traversing afterward we can find two different cases:
+
+Case 1: If the current interval can be merged with the last inserted interval of the answer list:
+In this case, we will update the end of the last inserted interval with the maximum(current interval’s end, last inserted interval’s end) and continue moving afterward. 
+
+Case 2: If the current interval cannot be merged with the last inserted interval of the answer list:
+In this case, we will insert the current interval in the answer array as it is. And after this insertion, the last inserted interval of the answer list will obviously be updated to the current interval.
+
+Note: Within the previous approach, we have already discussed how to check if the current interval can or cannot be merged with the other interval.
+
+Approach:
+The steps are as follows:
+
+First, we will group the closer intervals by sorting the given array of intervals(if it is not already sorted).
+After that, we will start traversing the array using a loop(say i) and insert the first element into our answer list(as the answer list is empty).
+Now, while traversing we will face two different cases:
+Case 1: If the current interval can be merged with the last inserted interval of the answer list:
+In this case, we will update the end of the last inserted interval with the maximum(current interval’s end, last inserted interval’s end) and continue moving afterward. 
+Case 2: If the current interval cannot be merged with the last inserted interval of the answer list:
+In this case, we will insert the current interval in the answer array as it is. And after this insertion, the last inserted interval of the answer list will obviously be updated to the current interval.
+Thus the answer list will be updated with the merged intervals and finally, we will return the answer list.
+Intuition: Since we have sorted the intervals, the intervals which will be merging are bound to be adjacent. We kept on merging simultaneously as we were traversing through the array and when the element was non-overlapping we simply inserted the element in our answer list.
+
+Dry Run:
+This dry run will further simplify the concept:
+
+The selected interval at each step is marked with yellow.
+
+
+Note: For a better understanding of intuition, please watch the video at the bottom of the page.
+
+Code
+C++
+Java
+Python
+JavaScript
+
+
+
+import java.util.*;
+
+public class Main {
+
+    public static List<List<Integer>> mergeOverlappingIntervals(int[][] arr) {
+        int n = arr.length; // size of the array
+        //sort the given intervals:
+        Arrays.sort(arr, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
+            }
+        });
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            // if the current interval does not
+            // lie in the last interval:
+            if (ans.isEmpty() || arr[i][0] > ans.get(ans.size() - 1).get(1)) {
+                ans.add(Arrays.asList(arr[i][0], arr[i][1]));
+            }
+            // if the current interval
+            // lies in the last interval:
+            else {
+                ans.get(ans.size() - 1).set(1,
+                                            Math.max(ans.get(ans.size() - 1).get(1), arr[i][1]));
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[][] arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18}};
+        List<List<Integer>> ans = mergeOverlappingIntervals(arr);
+        System.out.print("The merged intervals are: \n");
+        for (List<Integer> it : ans) {
+            System.out.print("[" + it.get(0) + ", " + it.get(1) + "] ");
+        }
+        System.out.println();
+    }
+}
+
+Output: [[1,6],[8,10],[15,18]]
+
+Complexity Analysis
+Time Complexity: O(N*logN) + O(N), where N = the size of the given array.
+Reason: Sorting the given array takes  O(N*logN) time complexity. Now, after that, we are just using a single loop that runs for N times. So, the time complexity will be O(N).
+
+Space Complexity: O(N), as we are using an answer list to store the merged intervals. Except for the answer array, we are not using any extra space.
