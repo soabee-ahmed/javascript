@@ -1,0 +1,61 @@
+Intuition
+Create Frequency Map for two strings string_S and string_T.
+Have a window in string_S that matches the condition that frequency of each alphabet in string_T has a frequency mapping in frequency_S that has frequency atleast greater than the frequency of that alphabet in frequency_T.
+Shrink the window size as much as possible and maintain the minimum end indices wisely.
+Approach
+Sliding Window
+Two Pointers
+Initialization :
+Initialize starting_index and ending_index to represent the minimum window.
+Create two frequency maps (frequency_S and frequency_T) to store the counts of characters in strings S and T, respectively.
+
+frequency_T is utilized :
+Iterate through each character in string T and update the frequency map frequency_T accordingly.
+
+Sliding Window :
+Use two pointers, first_pointer and second_pointer, to represent the start and end of the sliding window in string S.
+Iterate through each character in S using second_pointer.
+Update the frequency map frequency_S for the current character at second_pointer.
+
+Inner While Loop :
+While the current window contains all characters from T (i.e., frequency_S >= frequency_T), enter the inner while loop.
+Check if the current window size is smaller than the previously recorded minimum window. If yes, update starting_index and ending_index.
+
+Adjust the Window :
+Move the first_pointer to the right, reducing the window size.
+Update the frequency map frequency_S for the character at the first_pointer.
+
+Final Result :
+After processing the entire string_S , the minimum window is found , and the program returns the substring based on starting_index and ending_index.
+
+
+
+CODE(SOURCE:STRIVER)
+class Solution {
+    public String minWindow(String s, String t) {
+        int l=0,r=0,count=0,sIndex=-1;
+        int minlen=Integer.MAX_VALUE;
+        HashMap<Character,Integer> hm=new HashMap<>();
+        for(int i=0;i<t.length();i++){
+            hm.put(t.charAt(i),hm.getOrDefault(t.charAt(i),0)+1);
+        }
+        while(r<s.length()){
+            if(hm.getOrDefault(s.charAt(r),0)>0) count++;
+            hm.put(s.charAt(r),hm.getOrDefault(s.charAt(r),0)-1);
+            while(count==t.length()){
+                if(r-l+1<minlen){
+                minlen=r-l+1;
+                sIndex=l;
+                }
+                hm.put(s.charAt(l),hm.get(s.charAt(l))+1);
+                if(hm.get(s.charAt(l))>0) count--;
+                
+                l++;
+            }
+            
+            
+            r++;
+        }
+        return sIndex==-1?"":s.substring(sIndex,sIndex+minlen);
+    }
+}
